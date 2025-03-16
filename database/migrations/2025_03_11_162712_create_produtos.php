@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('descricao')->nullable();
             $table->enum('unidade_medida', ['UN', 'T', 'KG', 'G', 'L', 'ML', 'M', 'CM']);
             $table->enum('categoria', ['Eletrônicos', 'Alimentos', 'Vestuário', 'Geral']);
-            $table->integer('quantidade')->default(0);
+            $table->float('quantidade')->default(0);
             $table->decimal('preco', 8, 2)->default(0.00);
             $table->timestamps();
         });

@@ -25,6 +25,7 @@ class ProdutoController extends Controller
             'descricao' => 'nullable|string',
             'unidade_medida' => 'required',
             'categoria' => 'required',
+            'quantidade' => 'nullable|numeric|min:0|max:0',
             'preco' => 'required|numeric|min:0',
         ];
 
@@ -36,6 +37,9 @@ class ProdutoController extends Controller
             'marca' => 'Preencha a marca do produto.',
             'descricao.string'  => 'A descrição do produto deve ser do tipo string.',
             'unidade_medida.required' => 'Preencha a unidade de medida do produto.',
+            'quantidade.numeric' => 'A quantidade deve ser um valor numérico.',
+            'quantidade.min' => 'A quantidade deve ser igual a 0.',
+            'quantidade.max' => 'A quantidade deve ser igual a 0.',
             'preco.required' => 'Coloque o preço no produto.',
             'preco.numeric' => 'O preço do produto deve ser numérico.',
             'preco.min' => 'O valor mínimo do produto deve ser 0.',
@@ -45,6 +49,7 @@ class ProdutoController extends Controller
 
         if ($validator->fails()) {
             return response()->json([
+                'status_code' => 400,
                 'mensagem' => $validator->messages(),
             ], 400);
         }

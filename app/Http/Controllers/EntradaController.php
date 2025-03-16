@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrada;
+use App\Models\Produto;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class EntradaController extends Controller
 {
@@ -51,10 +53,23 @@ class EntradaController extends Controller
             ], 400);
         }
 
-        try{
-            return Entrada::create($request->all());
-        }
-        catch (Exception){
+        DB::beginTransaction();
+
+        try {
+            $entrada = Entrada::create($request->all());
+
+            // Atualize a quantidade do produto
+            $produto = Produto::find($request->id_produto);
+            if ($produto) {
+                $produto->quantidade += $request->quantidade;
+                $produto->save();
+            }
+
+            DB::commit();
+
+            return response()->json($entrada, 201);
+        } catch (Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'mensagem' => 'Não foi possível concluir a requisição.',
             ], 500);
@@ -83,61 +98,41 @@ class EntradaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $regras = [
-            'id_produto'  => 'nullable|integer',
-            'id_fornecedor' => 'nullable|integer',
-            'quantidade' => 'nullable|integer|min:1',
-            'nota_fiscal' => 'nullable|string',
-            'observacoes' => 'nullable|string',
-        ];
-
-        $feedback = [];
-
-        $validator = Validator::make($request->all(), $regras, $feedback);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'mensagem' => $validator->messages(),
-            ], 400);
-        }
-
-        $entrada = Entrada::where('id', '=', $id)->get()->first();
-        if (isset($entrada)){
-            $entrada->update($request->all());
-            return response()->json([
-                'status_code' => 200,
-                'mensagem' => 'Entrada alterada.',
-                'entrada' => $entrada,
-            ], 200);
-        }else {
-            return response()->json([
-                'status_code' => 404,
-                'mensagem' => 'Entrada não encontrada.',
-                'entrada' => [],
-            ], 404);
-        }
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $entrada = Entrada::where('id', '=', $id)->delete();
-        if ($entrada > 0){
+        DB::beginTransaction();
+
+        try {
+            $entrada = Entrada::where('id', '=', $id)->first();
+            if ($entrada) {
+                // Atualize a quantidade do produto
+                $produto = Produto::find($entrada->id_produto);
+                if ($produto) {
+                    $produto->quantidade -= $entrada->quantidade;
+                    $produto->save();
+                }
+
+                $entrada->delete();
+
+                DB::commit();
+
+                return response()->json([
+                    'status_code' => 200,
+                    'mensagem' => "Entrada excluída."
+                ], 200);
+            } else {
+                return response()->json([
+                    'status_code' => 404,
+                    'mensagem' => "Entrada não encontrada."
+                ], 404);
+            }
+        } catch (Exception $e) {
+            DB::rollBack();
             return response()->json([
-                'status_code' => 200,
-                'mensagem' => "Entrada excluído."
-            ], 200);
-        }else {
-            return response()->json([
-                'status_code' => 404,
-                'mensagem' => "Entrada não encontrada."
-            ], 404);
+                'mensagem' => 'Não foi possível concluir a requisição.',
+            ], 500);
         }
     }
 }

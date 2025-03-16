@@ -15,10 +15,10 @@ class Saida extends Model
         'quantidade',
         'nota_fiscal',
         'observacoes',
+        'created_at',
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
     ];
 }

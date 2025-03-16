@@ -8,7 +8,7 @@ Como forma de testar meus conhecimentos sobre APIs REST, desenvolvi esta API usa
 ```
 composer install
 ```
-* Crie o arquivo .env (uso o arquivo .env.examplo como referência) e faça as alterações necessários para usar o banco de dados:
+* Crie o arquivo .env (uso o arquivo .env.examplo como referência) e faça as alterações necessários para usar o banco de dados.
 * Faça as migrações:
 ```
 php artisan migrate

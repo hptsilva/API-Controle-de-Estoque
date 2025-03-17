@@ -102,18 +102,18 @@ class SaidaController extends Controller
      */
     public function show(string $id)
     {
-        $entrada = Saida::where('id', '=', $id)->get()->first();
-        if (isset($entrada)){
+        $saida = Saida::where('id', '=', $id)->get()->first();
+        if (isset($saida)){
             return response()->json([
                 'status_code' => 200,
-                'mensagem' => 'Entrada encontrada.',
-                'Entrada' => $entrada,
+                'mensagem' => 'Saída encontrada.',
+                'saida' => $saida,
             ], 200);
         }else {
             return response()->json([
                 'status_code' => 404,
-                'mensagem' => 'Entrada não encontrada.',
-                'entrada' => [],
+                'mensagem' => 'Saída não encontrada.',
+                'saida' => [],
             ], 404);
         }
     }

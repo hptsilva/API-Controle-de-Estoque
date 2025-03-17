@@ -86,7 +86,7 @@ class EntradaController extends Controller
             return response()->json([
                 'status_code' => 200,
                 'mensagem' => 'Entrada encontrada.',
-                'Entrada' => $entrada,
+                'entrada' => $entrada,
             ], 200);
         }else {
             return response()->json([
@@ -97,42 +97,67 @@ class EntradaController extends Controller
         }
     }
 
+    public function update(Request $request, string $id)
+    {
+
+        $regras = [
+            'nota_fiscal' => 'nullable|string',
+            'observacoes' => 'nullable|string',
+        ];
+
+        $feedback = [];
+
+        $validator = Validator::make($request->all(), $regras, $feedback);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'mensagem' => $validator->messages(),
+            ], 400);
+        }
+
+        $entrada = Entrada::where('id', '=', $id)->get()->first();
+        if (isset($entrada)){
+            $nota_fiscal = $request->get('nota_fiscal');
+            if (isset($nota_fiscal)){
+                $entrada->nota_fiscal = $request->get('nota_fiscal');
+            }
+            $observacoes = $request->get('observacoes');
+            if (isset($observacoes)){
+                $entrada->observacoes = $request->get('observacoes');
+            }
+            if (isset($nota_fiscal) || isset($observacoes)){
+                $entrada->update();
+                return response()->json([
+                    'status_code' => 200,
+                    'mensagem' => 'Entrada alterada.',
+                    'entrada' => $entrada,
+                ], 200);
+            }else {
+                $entrada->update();
+                return response()->json([
+                    'status_code' => 400,
+                    'mensagem' => 'Nenhum parâmetro inserido.',
+                    'entrada' => [],
+                ], 400);
+            }
+        }else {
+            return response()->json([
+                'status_code' => 404,
+                'mensagem' => 'Entrada não encontrada.',
+                'entrada' => [],
+            ], 404);
+        }
+        
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        DB::beginTransaction();
-
-        try {
-            $entrada = Entrada::where('id', '=', $id)->first();
-            if ($entrada) {
-                // Atualize a quantidade do produto
-                $produto = Produto::find($entrada->id_produto);
-                if ($produto) {
-                    $produto->quantidade -= $entrada->quantidade;
-                    $produto->save();
-                }
-
-                $entrada->delete();
-
-                DB::commit();
-
-                return response()->json([
-                    'status_code' => 200,
-                    'mensagem' => "Entrada excluída."
-                ], 200);
-            } else {
-                return response()->json([
-                    'status_code' => 404,
-                    'mensagem' => "Entrada não encontrada."
-                ], 404);
-            }
-        } catch (Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'mensagem' => 'Não foi possível concluir a requisição.',
-            ], 500);
-        }
+        return response()->json([
+            'status_code' => 403,
+            'mensagem' => 'Não é possível excluir o registro de entrada.'
+        ],403);
     }
 }

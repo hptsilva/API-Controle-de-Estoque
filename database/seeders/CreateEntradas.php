@@ -13,19 +13,35 @@ class CreateEntradas extends Seeder
     /**
      * Run the database seeds.
      */
+
+    public function quantidadeProduto(int $id_produto, int $quantidade)
+    {
+ 
+        $produto = Produto::where('id', '=', $id_produto)->get()->first();
+        
+        $quantidade_atual = $produto->quantidade + $quantidade;
+
+        $produto->quantidade = $quantidade_atual;
+        $produto->save();
+        return $quantidade;
+
+    }
+
     public function run(): void
     {
         $produtos = Produto::all();
         $fornecedores = Fornecedore::all();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
+            $id_produto = $produtos->random()->id;
             DB::table('entradas')->insert([
-                'id_produto' => $produtos->random()->id,
+                'id_produto' => $id_produto,
                 'id_fornecedor' => $fornecedores->random()->id,
-                'quantidade' => rand(1, 100),
+                'quantidade' => $this->quantidadeProduto($id_produto, rand(1, 100)),
                 'nota_fiscal' => 'NF-' . rand(1000, 9999),
                 'observacoes' => 'Observação ' . ($i + 1),
             ]);
         }
     }
+
 }

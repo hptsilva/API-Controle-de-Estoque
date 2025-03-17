@@ -1,6 +1,6 @@
 # API para Controle de Estoque
 
-Como forma de testar meus conhecimentos sobre APIs REST, desenvolvi esta API usando o framework Laravel e fiz uso do Postman para testar os endpoints e posteriormente sua documentação.
+Como forma de testar meus conhecimentos sobre APIs REST, desenvolvi esta API usando o framework Laravel e fiz uso do Postman para testar os endpoints.
 
 ## Instação:
 
@@ -20,3 +20,6 @@ php artisan migrate
 ```
 php artisan serve
 ```
+# Próximo passo:
+
+* Documentar a API usando o Postman.

@@ -34,6 +34,6 @@ php artisan db:seed --class=CreateEntradas
 ```php
 php artisan serve
 ```
-# Próximo passo:
+## Documentação:
 
-* Documentar a API usando o Postman.
+* https://documenter.getpostman.com/view/36701195/2sAYkDMLVr

@@ -16,10 +16,24 @@ composer install
 ```
 php artisan migrate
 ```
+* Preencha as tabelas:
+
+```
+# Preencha a tabela produtos
+php artisan db:seed --class=CreateProdutos
+```
+```
+# Preencha a tabela fornecedores
+php artisan db:seed --class=CreateFornecedores
+```
+```
+# Preencha a tabela entradas
+php artisan db:seed --class=CreateEntradas
+```
 * Inicie a aplicação:
 ```
 php artisan serve
 ```
 # Próximo passo:
 
-* Preencher a base dados usando o Seeder do Laravel e documentar a API usando o Postman.
+* Documentar a API usando o Postman.

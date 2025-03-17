@@ -22,4 +22,4 @@ php artisan serve
 ```
 # Próximo passo:
 
-* Preencher a base dados com dados básicos usando o Seeder e documentar a API usando o Postman.
+* Preencher a base dados usando o Seeder do Laravel e documentar a API usando o Postman.

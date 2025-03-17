@@ -2,7 +2,7 @@
 
 Como forma de testar meus conhecimentos sobre APIs REST, desenvolvi esta API usando o framework Laravel e fiz uso do Postman para testar os endpoints.
 
-## Instação:
+## Instalação:
 
 * Instale as dependências:
 ```

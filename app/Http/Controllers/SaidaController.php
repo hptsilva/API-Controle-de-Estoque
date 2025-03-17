@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entrada;
 use App\Models\Saida;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -56,24 +57,37 @@ class SaidaController extends Controller
         DB::beginTransaction();
 
         try {
-            $saida = Saida::create($request->all());
 
-            // Atualize a quantidade do produto
-            $produto = Produto::find($request->id_produto);
-            if ($produto) {
-                $produto->quantidade -= $request->quantidade;
-                if ($produto->quantidade < 0){
-                    return response()->json([
-                        'status_code' => '400',
-                        'mensagem' => 'Não é possível que a quantidade de produto seja menor que 0.',
-                    ], 400);
+            $entrada = Entrada::where('id_produto', '=', $request->get('id_produto'))->where('id_fornecedor', '=', $request->get('id_fornecedor'))->get()->first();
+
+            if(isset($entrada)){
+
+                $saida = Saida::create($request->all());
+
+                // Atualize a quantidade do produto
+                $produto = Produto::find($request->id_produto);
+                if ($produto) {
+                    $produto->quantidade -= $request->quantidade;
+                    if ($produto->quantidade < 0){
+                        return response()->json([
+                            'status_code' => '400',
+                            'mensagem' => 'Não é permitido que a diferença de quantidade entre entrada e saída seja menor que 0.',
+                        ], 403);
+                    }
+                    $produto->save();
                 }
-                $produto->save();
+
+                DB::commit();
+
+                return response()->json($saida, 201);
+
+            }else {
+                return response()->json([
+                    'status_code' => 404,
+                    'mensagem' => 'Relação entre produto e fornecedor não existe.'
+                ], 404);
             }
 
-            DB::commit();
-
-            return response()->json($saida, 201);
         } catch (Exception $e) {
             DB::rollBack();
             return response()->json([

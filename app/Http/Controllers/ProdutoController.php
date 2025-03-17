@@ -24,7 +24,6 @@ class ProdutoController extends Controller
             'marca' => 'required',
             'descricao' => 'nullable|string',
             'unidade_medida' => 'required',
-            'categoria' => 'required',
             'quantidade' => 'nullable|numeric|min:0|max:0',
             'preco' => 'required|numeric|min:0',
         ];
@@ -59,6 +58,7 @@ class ProdutoController extends Controller
         }
         catch (Exception){
             return response()->json([
+                'status_code' => 500,
                 'mensagem' => 'Não foi possível concluir a requisição.',
             ], 500);
         }
@@ -94,9 +94,11 @@ class ProdutoController extends Controller
 
         $regras = [
             'nome' => 'nullable|string|max:255',
-            'preco' => 'nullable|numeric|min:0',
+            'categoria' => 'nullable',
+            'marca' => 'nullable',
             'descricao' => 'nullable|string',
-            'quantidade' => 'nullable|min:0',
+            'unidade_medida' => 'nullable',
+            'preco' => 'nullable|numeric|min:0',
         ];
 
         $feedback = [];
@@ -131,17 +133,24 @@ class ProdutoController extends Controller
      */
     public function destroy(string $id)
     {
-        $produto = Produto::where('id', '=', $id)->delete();
-        if ($produto > 0){
+        try{
+            $produto = Produto::where('id', '=', $id)->delete();
+            if ($produto > 0){
+                return response()->json([
+                    'status_code' => 200,
+                    'mensagem' => "Produto excluído."
+                ], 200);
+            }else {
+                return response()->json([
+                    'status_code' => 404,
+                    'mensagem' => "Produto não encontrado."
+                ], 404);
+            }
+        } catch (Exception $e) {
             return response()->json([
-                'status_code' => 200,
-                'mensagem' => "Produto excluído."
-            ], 200);
-        }else {
-            return response()->json([
-                'status_code' => 404,
-                'mensagem' => "Produto não encontrado."
-            ], 404);
+                'status_code' => 403,
+                'mensagem' => "Nao é permitido apagar este produto."
+            ], 403);
         }
     }
 }

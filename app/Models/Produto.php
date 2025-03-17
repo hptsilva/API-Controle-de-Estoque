@@ -17,10 +17,10 @@ class Produto extends Model
         'categoria',
         'quantidade',
         'preco',
+        'created_at',
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
     ];
 }

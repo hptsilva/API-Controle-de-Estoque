@@ -18,20 +18,20 @@ php artisan migrate
 ```
 * Preencha as tabelas:
 
-```
+```php
 # Preencha a tabela produtos
 php artisan db:seed --class=CreateProdutos
 ```
-```
+```php
 # Preencha a tabela fornecedores
 php artisan db:seed --class=CreateFornecedores
 ```
-```
+```php
 # Preencha a tabela entradas
 php artisan db:seed --class=CreateEntradas
 ```
 * Inicie a aplicação:
-```
+```php
 php artisan serve
 ```
 # Próximo passo:

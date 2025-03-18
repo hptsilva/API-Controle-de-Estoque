@@ -23,7 +23,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Smartphone com tela de 6.5 polegadas e câmera dupla.',
                 'unidade_medida' => 'UN',
                 'categoria' => 'Eletrônicos',
-                'preco' => 1200.00,
+                'preco_custo' => 1200.00,
+                'preco_venda' => 2000.00,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Arroz Integral',
@@ -31,7 +33,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Arroz integral de alta qualidade.',
                 'unidade_medida' => 'KG',
                 'categoria' => 'Alimentos',
-                'preco' => 15.50,
+                'preco_custo' => 15.50,
+                'preco_venda' => 30.00,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Camiseta Algodão',
@@ -39,7 +43,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Camiseta de algodão macia e confortável.',
                 'unidade_medida' => 'UN',
                 'categoria' => 'Vestuário',
-                'preco' => 45.00,
+                'preco_custo' => 45.00,
+                'preco_venda' => 50.00,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Lâmpada LED',
@@ -47,7 +53,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Lâmpada LED de baixo consumo e alta durabilidade.',
                 'unidade_medida' => 'UN',
                 'categoria' => 'Geral',
-                'preco' => 12.99,
+                'preco_custo' => 12.99,
+                'preco_venda' => 41.40,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Notebook ABC',
@@ -55,7 +63,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Notebook com processador potente e design elegante.',
                 'unidade_medida' => 'UN',
                 'categoria' => 'Eletrônicos',
-                'preco' => 2500.00,
+                'preco_custo' => 2500.00,
+                'preco_venda' => 4000.00,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Feijão Carioca',
@@ -63,7 +73,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Feijão carioca selecionado.',
                 'unidade_medida' => 'KG',
                 'categoria' => 'Alimentos',
-                'preco' => 8.75,
+                'preco_custo' => 8.75,
+                'preco_venda' => 15.85,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Calça Jeans',
@@ -71,7 +83,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Calça jeans com corte moderno e excelente caimento.',
                 'unidade_medida' => 'UN',
                 'categoria' => 'Vestuário',
-                'preco' => 89.90,
+                'preco_custo' => 89.90,
+                'preco_venda' => 140.00,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Cadeira Escritório',
@@ -79,7 +93,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Cadeira de escritório ergonômica e confortável.',
                 'unidade_medida' => 'UN',
                 'categoria' => 'Geral',
-                'preco' => 180.00,
+                'preco_custo' => 180.00,
+                'preco_venda' => 200.00,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Mouse Sem Fio',
@@ -87,7 +103,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Mouse sem fio com design ergonômico e alta precisão.',
                 'unidade_medida' => 'UN',
                 'categoria' => 'Eletrônicos',
-                'preco' => 55.00,
+                'preco_custo' => 55.00,
+                'preco_venda' => 100.00,
+                'created_at' => date('Y-m-d H:i:s')
             ],
             [
                 'nome' => 'Açúcar Refinado',
@@ -95,7 +113,9 @@ class CreateProdutos extends Seeder
                 'descricao' => 'Açúcar refinado de alta qualidade.',
                 'unidade_medida' => 'KG',
                 'categoria' => 'Alimentos',
-                'preco' => 6.20,
+                'preco_custo' => 6.20,
+                'preco_venda' => 10.10,
+                'created_at' => date('Y-m-d H:i:s')
             ],
         ]);
     }

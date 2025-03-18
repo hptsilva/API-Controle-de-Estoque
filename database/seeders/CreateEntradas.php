@@ -37,6 +37,7 @@ class CreateEntradas extends Seeder
             DB::table('entradas')->insert([
                 'id_produto' => $id_produto,
                 'id_fornecedor' => $fornecedores->random()->id,
+                'preco_custo' => Produto::where('id', '=', $id_produto)->value('preco_custo'),
                 'quantidade' => $this->quantidadeProduto($id_produto, rand(1, 100)),
                 'nota_fiscal' => 'NF-' . rand(1000, 9999),
                 'observacoes' => 'Observação ' . ($i + 1),

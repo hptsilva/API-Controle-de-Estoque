@@ -56,12 +56,21 @@ class EntradaController extends Controller
         DB::beginTransaction();
 
         try {
-            $entrada = Entrada::create($request->all());
+
+            $entrada = new Entrada();
+
+            $entrada->id_produto = $request->get('id_produto');
+            $entrada->id_fornecedor = $request->get('id_fornecedor');
+            $entrada->preco_custo = Produto::where('id', '=', $request->get('id_produto'))->value('preco_custo');
+            $entrada->quantidade = $request->get('quantidade');
+            $entrada->nota_fiscal = $request->get('nota_fiscal');
+            $entrada->observacoes = $request->get('observacoes');
+            $entrada = $entrada->save();
 
             // Atualize a quantidade do produto
             $produto = Produto::find($request->id_produto);
             if ($produto) {
-                $produto->quantidade += $request->quantidade;
+                $produto->quantidade += $request->get('quantidade');
                 $produto->save();
             }
 

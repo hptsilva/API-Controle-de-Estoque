@@ -25,7 +25,8 @@ class ProdutoController extends Controller
             'descricao' => 'nullable|string',
             'unidade_medida' => 'required',
             'quantidade' => 'nullable|numeric|min:0|max:0',
-            'preco' => 'required|numeric|min:0',
+            'preco_custo' => 'required|numeric|min:0',
+            'preco_venda' => 'required|numeric|min:0',
         ];
 
         $feedback = [
@@ -39,9 +40,12 @@ class ProdutoController extends Controller
             'quantidade.numeric' => 'A quantidade deve ser um valor numérico.',
             'quantidade.min' => 'A quantidade deve ser igual a 0.',
             'quantidade.max' => 'A quantidade deve ser igual a 0.',
-            'preco.required' => 'Coloque o preço no produto.',
-            'preco.numeric' => 'O preço do produto deve ser numérico.',
-            'preco.min' => 'O valor mínimo do produto deve ser 0.',
+            'preco_custo.required' => 'Coloque o preço de custo do produto.',
+            'preco_custo.numeric' => 'O preço de custo do produto deve ser numérico.',
+            'preco_custo.min' => 'O valor mínimo de custo do produto deve ser 0.',
+            'preco_venda.required' => 'Coloque o preço de venda do produto.',
+            'preco_venda.numeric' => 'O preço de venda do produto deve ser numérico.',
+            'preco_venda.min' => 'O valor mínimo de venda do produto deve ser 0.',
         ];
 
         $validator = Validator::make($request->all(), $regras, $feedback);
@@ -98,7 +102,8 @@ class ProdutoController extends Controller
             'marca' => 'nullable',
             'descricao' => 'nullable|string',
             'unidade_medida' => 'nullable',
-            'preco' => 'nullable|numeric|min:0',
+            'preco_custo' => 'nullable|numeric|min:0',
+            'preco_venda' => 'nullable|numeric|min:0',
         ];
 
         $feedback = [];

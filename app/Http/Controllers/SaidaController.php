@@ -62,7 +62,15 @@ class SaidaController extends Controller
 
             if(isset($entrada)){
 
-                $saida = Saida::create($request->all());
+                $saida = new Saida();
+                
+                $saida->id_produto = $request->get('id_produto');
+                $saida->id_fornecedor = $request->get('id_fornecedor');
+                $saida->preco_custo = Produto::where('id', '=', $request->get('id_produto'))->value('preco_venda');
+                $saida->quantidade = $request->get('quantidade');
+                $saida->nota_fiscal = $request->get('nota_fiscal');
+                $saida->observacoes = $request->get('observacoes');
+                $saida = $saida->save();
 
                 // Atualize a quantidade do produto
                 $produto = Produto::find($request->id_produto);

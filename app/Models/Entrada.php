@@ -12,6 +12,7 @@ class Entrada extends Model
         'id',
         'id_produto',
         'id_fornecedor',
+        'preco_custo',
         'quantidade',
         'nota_fiscal',
         'observacoes',

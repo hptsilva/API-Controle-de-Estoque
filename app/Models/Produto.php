@@ -16,7 +16,8 @@ class Produto extends Model
         'unidade_medida',
         'categoria',
         'quantidade',
-        'preco',
+        'preco_custo',
+        'preco_venda',
         'created_at',
     ];
 

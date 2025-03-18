@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_produto');
             $table->unsignedBigInteger('id_fornecedor');
+            $table->decimal('preco_venda', 8, 2)->default(0.00);
             $table->integer('quantidade');
             $table->string('nota_fiscal');
             $table->string('observacoes')->nullable();

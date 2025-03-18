@@ -65,7 +65,7 @@ class EntradaController extends Controller
             $entrada->quantidade = $request->get('quantidade');
             $entrada->nota_fiscal = $request->get('nota_fiscal');
             $entrada->observacoes = $request->get('observacoes');
-            $entrada = $entrada->save();
+            $entrada->save();
 
             // Atualize a quantidade do produto
             $produto = Produto::find($request->id_produto);

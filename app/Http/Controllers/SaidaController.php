@@ -70,7 +70,7 @@ class SaidaController extends Controller
                 $saida->quantidade = $request->get('quantidade');
                 $saida->nota_fiscal = $request->get('nota_fiscal');
                 $saida->observacoes = $request->get('observacoes');
-                $saida = $saida->save();
+                $saida->save();
 
                 // Atualize a quantidade do produto
                 $produto = Produto::find($request->id_produto);

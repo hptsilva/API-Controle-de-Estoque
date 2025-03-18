@@ -66,7 +66,7 @@ class SaidaController extends Controller
                 
                 $saida->id_produto = $request->get('id_produto');
                 $saida->id_fornecedor = $request->get('id_fornecedor');
-                $saida->preco_custo = Produto::where('id', '=', $request->get('id_produto'))->value('preco_venda');
+                $saida->preco_venda = Produto::where('id', '=', $request->get('id_produto'))->value('preco_venda');
                 $saida->quantidade = $request->get('quantidade');
                 $saida->nota_fiscal = $request->get('nota_fiscal');
                 $saida->observacoes = $request->get('observacoes');

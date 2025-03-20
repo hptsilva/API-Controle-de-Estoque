@@ -171,7 +171,7 @@ class SaidaController extends Controller
         }else {
             return response()->json([
                 'status_code' => 404,
-                'mensagem' => 'Entrada não encontrada.',
+                'mensagem' => 'Saída não encontrada.',
                 'saida' => [],
             ], 404);
         }

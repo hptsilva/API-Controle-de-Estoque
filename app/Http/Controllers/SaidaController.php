@@ -165,14 +165,14 @@ class SaidaController extends Controller
                 return response()->json([
                     'status_code' => 400,
                     'mensagem' => 'Nenhum parâmetro inserido.',
-                    'entrada' => [],
+                    'saida' => [],
                 ], 400);
             }
         }else {
             return response()->json([
                 'status_code' => 404,
                 'mensagem' => 'Entrada não encontrada.',
-                'entrada' => [],
+                'saida' => [],
             ], 404);
         }
         

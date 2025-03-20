@@ -142,7 +142,6 @@ class EntradaController extends Controller
                     'entrada' => $entrada,
                 ], 200);
             }else {
-                $entrada->update();
                 return response()->json([
                     'status_code' => 400,
                     'mensagem' => 'Nenhum parâmetro inserido.',

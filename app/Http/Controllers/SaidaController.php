@@ -126,6 +126,58 @@ class SaidaController extends Controller
         }
     }
 
+    public function update(Request $request, string $id)
+    {
+
+        $regras = [
+            'nota_fiscal' => 'nullable|string',
+            'observacoes' => 'nullable|string',
+        ];
+
+        $feedback = [];
+
+        $validator = Validator::make($request->all(), $regras, $feedback);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'mensagem' => $validator->messages(),
+            ], 400);
+        }
+
+        $saida = Saida::where('id', '=', $id)->get()->first();
+        if (isset($saida)){
+            $nota_fiscal = $request->get('nota_fiscal');
+            if (isset($nota_fiscal)){
+                $saida->nota_fiscal = $request->get('nota_fiscal');
+            }
+            $observacoes = $request->get('observacoes');
+            if (isset($observacoes)){
+                $saida->observacoes = $request->get('observacoes');
+            }
+            if (isset($nota_fiscal) || isset($observacoes)){
+                $saida->update();
+                return response()->json([
+                    'status_code' => 200,
+                    'mensagem' => 'Saída alterada.',
+                    'saida' => $saida,
+                ], 200);
+            }else {
+                return response()->json([
+                    'status_code' => 400,
+                    'mensagem' => 'Nenhum parâmetro inserido.',
+                    'entrada' => [],
+                ], 400);
+            }
+        }else {
+            return response()->json([
+                'status_code' => 404,
+                'mensagem' => 'Entrada não encontrada.',
+                'entrada' => [],
+            ], 404);
+        }
+        
+    }
+
     /**
      * Remove the specified resource from storage.
      */

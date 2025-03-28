@@ -48,4 +48,4 @@ php artisan serve
 ```
 ## Documentação:
 
-* https://documenter.getpostman.com/view/36701195/2sB2cPik6Z#578c5025-6308-47f7-9ee6-c7a68072f109
+* https://documenter.getpostman.com/view/36701195/2sB2cPik6Z

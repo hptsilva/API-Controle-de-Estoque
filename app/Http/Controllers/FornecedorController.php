@@ -95,12 +95,12 @@ class FornecedorController extends Controller
     public function update(Request $request, string $id)
     {
         $regras = [
-            'nome' => 'nullable|string|max:255',
-            'cnpj' => 'nullable|integer|min_digits:14|max_digits:14',
+            'nome' => 'required|string|max:255',
+            'cnpj' => 'required|integer|min_digits:14|max_digits:14',
             'endereco' => 'nullable|string',
-            'telefone' => 'nullable|integer|max_digits:10',
-            'email' => 'nullable|email',
-            'contato' => 'nullable|string|max:255',
+            'telefone' => 'required|integer|max_digits:10',
+            'email' => 'required|email',
+            'contato' => 'required|string|max:255',
         ];
 
         $feedback = [];

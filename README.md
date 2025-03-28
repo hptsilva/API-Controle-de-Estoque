@@ -19,6 +19,18 @@ php artisan migrate
 * Preencha as tabelas:
 
 ```php
+# Preencha a tabela marcas
+php artisan db:seed --class=CreateMarcas
+```
+```php
+# Preencha a tabela categorias
+php artisan db:seed --class=CreateCategorias
+```
+```php
+# Preencha a tabela unidades
+php artisan db:seed --class=CreateUnidades
+```
+```php
 # Preencha a tabela produtos
 php artisan db:seed --class=CreateProdutos
 ```

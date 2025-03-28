@@ -186,8 +186,8 @@ class SaidaController extends Controller
         DB::beginTransaction();
 
         try {
-            $saida = Saida::where('id', '=', $id)->first();
-            if ($saida) {
+            $saida = Saida::where('id', '=', $id)->get()->first();
+            if (isset($saida)) {
                 // Atualize a quantidade do produto
                 $produto = Saida::find($saida->id_produto);
                 if ($produto) {

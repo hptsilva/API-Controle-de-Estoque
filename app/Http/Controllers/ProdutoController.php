@@ -42,10 +42,10 @@ class ProdutoController extends Controller
             'quantidade.max' => 'A quantidade deve ser igual a 0.',
             'preco_custo.required' => 'Coloque o preço de custo do produto.',
             'preco_custo.numeric' => 'O preço de custo do produto deve ser numérico.',
-            'preco_custo.min' => 'O valor mínimo de custo do produto deve ser 0.',
+            'preco_custo.min' => 'O valor mínimo de custo do produto é igual a 0.',
             'preco_venda.required' => 'Coloque o preço de venda do produto.',
             'preco_venda.numeric' => 'O preço de venda do produto deve ser numérico.',
-            'preco_venda.min' => 'O valor mínimo de venda do produto deve ser 0.',
+            'preco_venda.min' => 'O valor mínimo de venda do produto é igual a 0.',
         ];
 
         $validator = Validator::make($request->all(), $regras, $feedback);
@@ -154,7 +154,7 @@ class ProdutoController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'status_code' => 403,
-                'mensagem' => "Nao é permitido apagar este produto."
+                'mensagem' => "Nao foi possível concluir a requisição."
             ], 403);
         }
     }

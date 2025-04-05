@@ -46,6 +46,11 @@ php artisan db:seed --class=CreateEntradas
 ```php
 php artisan serve
 ```
+
+## Observações:
+
+* Todas as rotas são protegidos pelo JWT-Auth.
+
 ## Documentação:
 
 * https://documenter.getpostman.com/view/36701195/2sB2cPik6Z

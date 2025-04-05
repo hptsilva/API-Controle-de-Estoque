@@ -42,6 +42,10 @@ php artisan db:seed --class=CreateFornecedores
 # Preencha a tabela entradas
 php artisan db:seed --class=CreateEntradas
 ```
+```php
+# Inclui um usuário para autenticação
+php artisan db:seed --class=CreateUsers
+```
 * Inicie a aplicação:
 ```php
 php artisan serve

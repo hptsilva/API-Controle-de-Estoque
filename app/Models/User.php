@@ -61,4 +61,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    protected $casts = [
+        'password' => 'hashed',
+    ];
 }

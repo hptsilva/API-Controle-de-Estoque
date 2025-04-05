@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Exception;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,27 +19,57 @@ class AuthController extends Controller
      */
     public function register(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
+        $regras = [
+            'nome' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+            'senha' => 'required|string|min:6',
+        ];
+
+        $feedback = [
+            'nome.required' => 'O campo nome é obrigatório.',
+            'nome.string' => 'O campo nome deve ser do tipo string.',
+            'nome.between' => 'O nome deve ter entre 2 e 100 caracteres.',
+            'email.required' => 'O campo email é obrigatório.',
+            'email.string' => 'O campo email deve ser do tipo string.',
+            'email.email' => 'O email deve ser válido.',
+            'email.max' => 'O campo email deve ter no máximo 100 caracteres',
+            'email.unique' => 'Este email já está cadastrado.',
+            'senha.required' => 'O campo senha é obrigatório.',
+            'senha.string' => 'O campo senha deve ser do tipo string',
+            'senha.min' => 'A senha deve ter no mínimo 6 caracteres.'
+        ];
+
+        $validator = Validator::make($request->all(), $regras, $feedback);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+            return response()->json([
+                'status_code' => 400,
+                'mensagem' => $validator->messages()
+            ], 400);
         }
 
-        $user = User::create(array_merge(
-            $validator->validated(),
-            ['password' => bcrypt($request->password)]
-        ));
+        $user = new User;
 
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+        $user->name = $request->get('nome');
+        $user->email = $request->get('email');
+        $user->password = $request->get('senha');
+        try{
+            $user->save();
+        
+            return response()->json([
+                'message' => 'Usuário cadastrado com sucesso.',
+                'user' => $user
+            ], 201);
+
+        } catch (Exception) {
+
+            return response()->json([
+                'status_code' => 500,
+                'message' => 'Não foi possível concluir a requisição.',
+            ], 500);
+        }
+
     }
-    
     
     /**
      * Get a JWT via given credentials.
@@ -50,7 +81,10 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (!$token = JWTAuth::attempt($credentials)) {
-            return response()->json(['message' => 'Não autorizado'], 401);
+            return response()->json([
+                'status_code' => 401,
+                'mensagem' => 'Não autorizado.'
+            ], 401);
         }
 
         return $this->respondWithToken($token);
@@ -65,7 +99,10 @@ class AuthController extends Controller
     {
         JWTAuth::invalidate(JWTAuth::getToken());
 
-        return response()->json(['message' => 'Desconectado com sucesso']);
+        return response()->json([
+            'status_code'  => 200,
+            'mensagem' => 'Usuário desconectado.'
+        ],200);
     }
 
     /**

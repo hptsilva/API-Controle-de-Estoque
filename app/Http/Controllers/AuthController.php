@@ -57,15 +57,15 @@ class AuthController extends Controller
             $user->save();
         
             return response()->json([
-                'message' => 'Usuário cadastrado com sucesso.',
-                'user' => $user
+                'mensagem' => 'Usuário cadastrado com sucesso.',
+                'usuario' => $user
             ], 201);
 
         } catch (Exception) {
 
             return response()->json([
                 'status_code' => 500,
-                'message' => 'Não foi possível concluir a requisição.',
+                'mensagem' => 'Não foi possível concluir a requisição.',
             ], 500);
         }
 

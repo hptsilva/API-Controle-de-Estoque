@@ -14,7 +14,7 @@ class CreateUsers extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'id_produto' => 1,
+            'id' => 1,
             'name' => 'Usuário de teste',
             'email' => 'teste@teste.com',
             'email_verified_at' => null,

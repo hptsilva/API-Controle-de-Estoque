@@ -53,7 +53,14 @@ php artisan serve
 
 ## Observações:
 
-* Todas as rotas são protegidos pelo JWT-Auth.
+* Todas os endpoints para controle de estoque são protegidos pelo JWT-Auth, então é necessário gerar uma chave secreta:
+```php
+php artisan jwt:secret
+```
+## Credenciais de autenticação:
+
+* E-mail: teste@teste.com
+* Senha: teste123
 
 ## Documentação:
 

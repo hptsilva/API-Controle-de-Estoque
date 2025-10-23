@@ -79,7 +79,7 @@ class CategoriaController extends Controller
     public function update(Request $request, string $id)
     {
         $regras = [
-            'nome' => 'required|string|max:255',
+            'nome' => 'string|max:255',
         ];
 
         $feedback = [];

@@ -130,8 +130,8 @@ class SaidaController extends Controller
     {
 
         $regras = [
-            'nota_fiscal' => 'nullable|string',
-            'observacoes' => 'nullable|string',
+            'nota_fiscal' => 'string',
+            'observacoes' => 'string',
         ];
 
         $feedback = [];

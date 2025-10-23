@@ -97,13 +97,13 @@ class ProdutoController extends Controller
     {
 
         $regras = [
-            'nome' => 'required|string|max:255',
-            'categoria' => 'required',
-            'marca' => 'required',
-            'descricao' => 'nullable|string',
-            'unidade_medida' => 'required',
-            'preco_custo' => 'required|numeric|min:0',
-            'preco_venda' => 'required|numeric|min:0',
+            'nome' => 'string|max:255',
+            'categoria' => 'integer',
+            'marca' => 'integer',
+            'descricao' => 'string',
+            'unidade_medida' => 'integer',
+            'preco_custo' => 'numeric|min:0',
+            'preco_venda' => 'numeric|min:0',
         ];
 
         $feedback = [];

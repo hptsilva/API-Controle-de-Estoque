@@ -83,8 +83,8 @@ class UnidadesController extends Controller
     public function update(Request $request, string $id)
     {
         $regras = [
-            'nome' => 'required|string|max:255',
-            'sigla' => 'required|string|max:8',
+            'nome' => 'string|max:255',
+            'sigla' => 'string|max:8',
         ];
 
         $feedback = [];
